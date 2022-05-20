@@ -1,0 +1,17 @@
+Dating_user
+	<사용자 정보>
+	
+Dating_Transaction
+	사용자가 결제한 정보를 모두 저장 (현물 쓴 정보)
+
+Dating_Diamond
+	사용자가 다이아를 사용한 정보를 모두 저장
+
+Dating_Chat
+	사용자들의 채팅 내역 모두 저장
+
+Dating_Place
+	(광고로 받은)식당 정보 저장
+
+Dating_reservation
+	장소를 예약한 정보를 저장해준다.
