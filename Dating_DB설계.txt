@@ -1,11 +1,48 @@
 Dating_user
 	<사용자 정보>
+	usernum (PK)
+	userid
+	userpw
+	username
+	userage
+	userbirthday (date type)
+	useredustatus (목록중에 하나 고를거야.)
+	userjobstatus
+	userphone	
+	usergender
+	useremail
+	usermbti (4letterstring)
+	userpersonality (long string from checkbox with commas)
+	userhobby (long string from checkbox with commas)
+	userdiamond 
+	userjoindate (date type)
 	
+	
+
 Dating_Transaction
 	사용자가 결제한 정보를 모두 저장 (현물 쓴 정보)
+	trans_num
+	usernum
+	trans_won
+	trans_dia
+	trand_date
+	
 
-Dating_Diamond
-	사용자가 다이아를 사용한 정보를 모두 저장
+Dating_Dia
+	사용자가 결제한 정보를 모두 저장 (다이아 쓴 정보)
+	dia_num
+	usernum
+	dia_usedate
+	
+Dating_Admin
+
+	웹사이트를 관리한다.
+	adminnum	
+	adminname
+	adminid
+	adminpw
+	
+
 
 Dating_Chat
 	사용자들의 채팅 내역 모두 저장
@@ -15,3 +52,6 @@ Dating_Place
 
 Dating_reservation
 	장소를 예약한 정보를 저장해준다.
+
+
+
