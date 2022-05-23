@@ -16,28 +16,28 @@ Dating_user
 	userhobby (long string from checkbox with commas)
 	userdiamond 
 	userjoindate (date type)
-	
+	userregion
 	
 
 Dating_Transaction
 	사용자가 결제한 정보를 모두 저장 (현물 쓴 정보)
-	trans_num
-	usernum
+	trans_num (PK)
+	usernum	(FK)
 	trans_won
 	trans_dia
-	trand_date
+	trans  _date
 	
 
 Dating_Dia
 	사용자가 결제한 정보를 모두 저장 (다이아 쓴 정보)
-	dia_num
-	usernum
+	dia_num (PK)
+	usernum (FK)
 	dia_usedate
 	
 Dating_Admin
 
 	웹사이트를 관리한다.
-	adminnum	
+	adminnum	(PK)
 	adminname
 	adminid
 	adminpw
@@ -46,12 +46,57 @@ Dating_Admin
 
 Dating_Chat
 	사용자들의 채팅 내역 모두 저장
+	Chat_num	(PK)
+	Chat_sender
+	Chat_receiver
+	Chat_time
+	Chat_content
+	
+	
 
 Dating_Place
+	요일별, 시간별 인원수를 저장할건데, 그건 다른 테이블에 할거임.
 	(광고로 받은)식당 정보 저장
+	placenum	(PK)
+	placename
+	placeregion
+	placepostcode
+	placeroadaddr
+	placejibunaddr
+	placedetailaddr
+	placeetcaddr
+
+Dating_Timetable
+	placenum(FK)
+	weekday
+	timenum
+	capacity
+
+
+Dating_CurrentTimeTable (예약은 무조건 2인)
+	
+
+	placenum(FK)
+	weekday
+	timenum
+	capacity
+	
+	
+
 
 Dating_reservation
 	장소를 예약한 정보를 저장해준다.
+	res_num (PK)
+	conn_num (FK)
+	placenum (PK)
+	res_time 
+	
 
 
 
+Dating_Connection
+	사람들 사이의 관계를 설정해준다. 
+	Conn_sender
+	Conn_receiver
+	Conn_status
+	
