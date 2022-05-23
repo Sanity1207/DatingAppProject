@@ -16,7 +16,7 @@ Dating_user
 	userhobby (long string from checkbox with commas)
 	userdiamond 
 	userjoindate (date type)
-	userregion
+	userregion (서울 안에서 거주 지역 선택)
 	
 
 Dating_Transaction
@@ -67,21 +67,24 @@ Dating_Place
 	placeetcaddr
 
 Dating_Timetable
-	placenum(FK)
-	weekday
-	timenum
-	capacity
-
-
-Dating_CurrentTimeTable (예약은 무조건 2인)
-	
+(요일별로 몇시에 몇 자리를 받을지를 반영해주는 테이블입니다.)
+(timestring 은 가능한 모든 시간 타임을 적어준 string 입니다.
+오후 7시 와 8시 예약이 가능하다고 하면  19,20 이런식으로 표시됨.
 
 	placenum(FK)
-	weekday
-	timenum
-	capacity
-	
-	
+	timetable_weekday
+	timetable_capacity
+	timetable_timestring
+
+
+Dating_CurrentTimeTable (예약은 무조건 2인) 
+(식당의 특정 날짜에 특정 시간에 자리가 얼마나 찼는지 실시간으로 반영해주는 테이블입니다. 한 2~3주정도 반영할듯
+
+	placenum(FK)
+	curtimetable_reservdate
+	curtimetable_reservweekday
+	curtimetable_timenum
+	curtimetable_capacity
 
 
 Dating_reservation
@@ -90,13 +93,14 @@ Dating_reservation
 	conn_num (FK)
 	placenum (PK)
 	res_time 
-	
-
-
 
 Dating_Connection
 	사람들 사이의 관계를 설정해준다. 
 	Conn_sender
 	Conn_receiver
 	Conn_status
+	Conn_Time (친구를 신청한 날짜와 시간)
+
+Dating_manager
+	레스토랑의 오너. 회원가입 하고 자신의 레스토랑을 추가할 수 있다.
 	
