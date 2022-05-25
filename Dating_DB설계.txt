@@ -58,6 +58,7 @@ Dating_Place
 	요일별, 시간별 인원수를 저장할건데, 그건 다른 테이블에 할거임.
 	(광고로 받은)식당 정보 저장
 	placenum	(PK)
+	managernum (FK) <주인이 누군지 표시는 해줘야지.>
 	placename
 	placeregion
 	placepostcode

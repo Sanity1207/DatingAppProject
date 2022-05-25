@@ -1,3 +1,16 @@
+DROP TABLE DATING_USER CASCADE CONSTRAINTS PURGE;
+DROP TABLE DATING_ADMIN CASCADE CONSTRAINTS PURGE;
+DROP TABLE DATING_PLACE CASCADE CONSTRAINTS PURGE;
+DROP TABLE DATING_DIAMOND CASCADE CONSTRAINTS PURGE;
+DROP TABLE DATING_PLACE_TIMETABLE CASCADE CONSTRAINTS PURGE;
+DROP TABLE DATING_PLACE_CURRENTTIMETABLE CASCADE CONSTRAINTS PURGE;
+DROP TABLE DATING_CONNECTION CASCADE CONSTRAINTS PURGE;
+DROP TABLE DATING_RESERVATION CASCADE CONSTRAINTS PURGE;
+DROP TABLE DATING_USER CASCADE CONSTRAINTS PURGE;
+DROP TABLE DATING_TRANSACTION CASCADE CONSTRAINTS PURGE;
+
+
+
 CREATE TABLE dating_user(
 	usernum number(10) PRIMARY KEY,
 	userid varchar2(300) NOT NULL,
@@ -24,15 +37,15 @@ CREATE TABLE dating_transaction(
 	transwon number(8) NOT NULL,
 	transdia number(5) NOT NULL,
 	transdate DATE DEFAULT SYSDATE NOT NULL,
-	CONSTRAINT fk_transaction_user FOREIGN KEY(usernum)
+	CONSTRAINT fk_user_transaction FOREIGN KEY(usernum)
 	REFERENCES dating_user(usernum) ON DELETE CASCADE 
 );
 
 CREATE TABLE dating_diamond( --사용자가 다이아를 사용한 기록을 저장
 	dianum number(10) PRIMARY KEY,
-	usernum varchar2(300),
+	usernum number(10),
 	diausedate DATE DEFAULT SYSDATE NOT NULL,
-	CONSTRAINT fk_diamond_user FOREIGN KEY(usernum)
+	CONSTRAINT fk_user_diamond FOREIGN KEY(usernum)
 	REFERENCES dating_user(usernum) ON DELETE CASCADE 
 );
 
@@ -62,9 +75,9 @@ CREATE TABLE dating_chat( --.질문 . can there be multiple foreign keys pointing 
 	chatreceiver NUMBER(10) NOT NULL,
 	chattime DATE DEFAULT sysdate NOT NULL,
 	chatcontent varchar2(3000) NOT NULL,
-	CONSTRAINT fk_chat_user_sender FOREIGN KEY(chatsender)
+	CONSTRAINT fk_user_chat_sender FOREIGN KEY(chatsender)
 	REFERENCES dating_user(usernum) ON DELETE CASCADE, 
-	CONSTRAINT fk_chat_user_receiver FOREIGN KEY(chatreceiver)
+	CONSTRAINT fk_user_chat_receiver FOREIGN KEY(chatreceiver)
 	REFERENCES dating_user(usernum) ON DELETE CASCADE 
 );
 
@@ -84,7 +97,7 @@ CREATE TABLE dating_place(
 ----------------------------여기서부터 좀 check 하기. 살짝 오류 많을수도.
 CREATE TABLE dating_place_timetable(
 	placenum number(10) NOT NULL,
-	timetable_weekday varchar2(300) NOT NULL,
+	timetable_weekday varchar2(300) NOT NULL, --어느 요일의 시간표를 나타낼건지를 표시
 	timetable_capacity number(3) NOT NULL,
 	timetable_timestring varchar2(300) NOT NULL,
 	CONSTRAINT fk_timetable_place FOREIGN KEY(placenum)
@@ -101,8 +114,9 @@ CREATE TABLE dating_place_currenttimetable(
 	REFERENCES dating_place(placenum) ON DELETE CASCADE
 );
 
+
 CREATE TABLE dating_connection(
-	connnum number(10) NOT NULL,
+	connnum number(10) NOT NULL PRIMARY KEY,
 	connsender number(10) NOT NULL,
 	connreceiver number(10) NOT NULL,
 	connstatus varchar2(300) NOT NULL,
@@ -110,10 +124,7 @@ CREATE TABLE dating_connection(
 	REFERENCES dating_user(usernum) ON DELETE CASCADE,
 	CONSTRAINT fk_user_connection_sender FOREIGN KEY(connsender)
 	REFERENCES dating_user(usernum) ON DELETE CASCADE
-
 );
-
-
 
 
 CREATE TABLE dating_reservation(
@@ -125,11 +136,7 @@ CREATE TABLE dating_reservation(
 	REFERENCES dating_connection(connnum) ON DELETE CASCADE,
 	CONSTRAINT fk_place_reservation FOREIGN KEY(placenum)
 	REFERENCES dating_place(placenum) ON DELETE CASCADE
-
 );
-
-
-
 
 
 
